@@ -101,7 +101,7 @@ let rec evalc (conf:configuration) : store =
                      continue_cont = Some (While (b, c)) } in
         evalc { store = s;
                 cmd = c;
-                cont = Seq (conf.cont, While (b, c));
+                cont = Seq (While (b, c), conf.cont);
                 k = loop :: conf.k }
       else
         evalc { conf with cmd = conf.cont; cont = Skip }
