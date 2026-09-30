@@ -10,17 +10,17 @@ open Errors
 (* A type for stores. *)
 type store = (var, int) Hashtbl.t
 
-type continuation = {
-  break_cont : com option;     (* command to run after break *)
-  continue_cont : com option;  (* command to run after continue *)
+type cnt_pairs = {
+  bc: com;
+  cc: com;
 }
 
 (* A type for configurations. *)
 type configuration = {
   store : store;
   cmd : com;
-  cont : com;
-  k : continuation list;
+  cnt : com;
+  k : cnt_pairs list
 }
 
 (* Create an initial configuration from a command. *)
@@ -28,7 +28,7 @@ let make_configuration (c:com) : configuration =
   {
     store = Hashtbl.create 64;
     cmd = c;
-    cont = Skip;
+    cnt = Skip;
     k = [];
   }
 
@@ -79,35 +79,35 @@ let rec evalc (conf:configuration) : store =
   match conf.cmd with
   | Skip ->
       (* execute the continuation *)
-      if conf.cont = Skip then s
-      else evalc { conf with cmd = conf.cont; cont = Skip }
+      if conf.cnt = Skip then s
+      else evalc { conf with cmd = conf.cnt; cnt = Skip }
   | Assign (x, a) ->
       Hashtbl.replace s x (eval_aexp s a);
-      evalc { conf with cmd = conf.cont; cont = Skip }
+      evalc { conf with cmd = conf.cnt; cnt = Skip }
   | Print a ->
       print_int (eval_aexp s a);
       print_newline ();
-      evalc { conf with cmd = conf.cont; cont = Skip }
+      evalc { conf with cmd = conf.cnt; cnt = Skip }
   | Seq (c1, c2) ->
-      if conf.cont = Skip
-      then evalc { conf with cmd = c1; cont = c2 }
-      else evalc { conf with cmd = c1; cont = Seq (c2, conf.cont) }
+      if conf.cnt = Skip
+      then evalc { conf with cmd = c1; cnt = c2 }
+      else evalc { conf with cmd = c1; cnt = Seq (c2, conf.cnt) }
   | If (b, c1, c2) ->
       let branch = if eval_bexp s b then c1 else c2 in
-      evalc { conf with cmd = branch; cont = conf.cont }
+      evalc { conf with cmd = branch; cnt = conf.cnt }
   | While (b, c) ->
       if eval_bexp s b then
-        let loop = { break_cont = Some conf.cont;
-                     continue_cont = Some (While (b, c)) } in
+        let loop = { bc = conf.cnt;
+                     cc = Seq (While (b, c), conf.cnt) } in
         evalc { store = s;
                 cmd = c;
-                cont = Seq (While (b, c), conf.cont);
+                cnt = Seq (Continue, conf.cnt);
                 k = loop :: conf.k }
       else
-        evalc { conf with cmd = conf.cont; cont = Skip }
+        evalc { conf with cmd = conf.cnt; cnt = Skip }
   | Test (info, b) ->
       if eval_bexp s b then
-        evalc { conf with cmd = conf.cont; cont = Skip }
+        evalc { conf with cmd = conf.cnt; cnt = Skip }
       else begin
         Printf.printf "TestFailed at %s\n" (Pprint.strInfo info);
         exit 1
@@ -115,16 +115,10 @@ let rec evalc (conf:configuration) : store =
   | Break ->
       (match conf.k with
        | [] -> raise IllegalBreak
-       | loop :: _ ->
-           (match loop.break_cont with
-            | Some k -> evalc { conf with cmd = k; cont = Skip;
-                                k = List.tl conf.k }
-            | None -> raise IllegalBreak))
+       | head :: tail ->
+           evalc { conf with cmd = head.bc; cnt = Skip; k = tail })
   | Continue ->
       (match conf.k with
        | [] -> raise IllegalContinue
-       | loop :: _ ->
-           (match loop.continue_cont with
-            | Some k -> evalc { conf with cmd = k; cont = Skip;
-                                k = conf.k }
-            | None -> raise IllegalContinue))
+       | head :: tail ->
+           evalc { conf with cmd = head.cc; cnt = Skip; k = tail })

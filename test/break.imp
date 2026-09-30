@@ -1,0 +1,13 @@
+x := 1;
+y := 1;
+while (true) do {
+  while (true) do {
+    x := x + 1;
+    if (4 < x) then { break } else { skip };
+    continue;
+    y := y + 1
+  };
+  break
+};
+x := x * 2;
+print x
