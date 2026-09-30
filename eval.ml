@@ -63,12 +63,10 @@ let rec eval_bexp (s:store) (b:bexp) : bool =
   | GreaterEq (a1, a2) -> eval_aexp s a1 >= eval_aexp s a2
   | Not b1 -> not (eval_bexp s b1)
   | And (b1, b2) ->
-      (* Evaluate both sides; no short-circuit. *)
       let v1 = eval_bexp s b1 in
       let v2 = eval_bexp s b2 in
       v1 && v2
   | Or (b1, b2) ->
-      (* Evaluate both sides; no short-circuit. *)
       let v1 = eval_bexp s b1 in
       let v2 = eval_bexp s b2 in
       v1 || v2
@@ -78,7 +76,6 @@ let rec evalc (conf:configuration) : store =
   let s = conf.store in
   match conf.cmd with
   | Skip ->
-      (* execute the continuation *)
       if conf.cnt = Skip then s
       else evalc { conf with cmd = conf.cnt; cnt = Skip }
   | Assign (x, a) ->

@@ -1,38 +1,40 @@
 Generative AI Disclosure (if appropriate)
 1. What tool(s) did you use?
 Martin: claude.ai
-Harrishan: 
+Harrishan: deepseek
 
 2. What kinds of prompts did you use? (No need to give the full log, but please be specific.)
 Martin: "Is this test good enough for testing this case?"
 Harrishan: 
+  "How do I map the variable to int for store?"
+  "Can you improve the structure of my code?"
 
 3. What is a concrete example of how the tool(s) were helpful or unhelpful?
 Martin: I had an idea of which cases i wanted to test but it helped writing relevant tests
-Harrishan: 
+Harrishan: It helped me to write in a language that I wasn't familiar with. It helped me get some cases right such as input, print and test.
 
 4. What is your current opinion of the strengths and weaknesses of the tools?
 Martin: It makes me save so much time
-Harrishan: 
+Harrishan: It also saved me time, but I'm surprised that AI still makes logic mistakes (e.g. the while case)
 
 Debriefing
-1. How many hours did yous pend on this assignment?
+1. How many hours did you spend on this assignment?
 Martin: 4h
-Harrishan: 
+Harrishan: 5h
 
 2. Would you rate it as easy, moderate, or difficult?
 Martin: easy
-Harrishan: 
+Harrishan: easy
 
 3. Did everyone in your study group participate?
 Martin: part 2
 Harrishan: part 1
 
-4. Howdeeply do youfeel you understand the material it covers (0%–100%)?
+4. How deeply do you feel you understand the material it covers (0%–100%)?
 Martin: 90%
-Harrishan: 
+Harrishan: 80%
 
-5. If you have any other comments, we wouldlike to hear them! Please write them here or post
+5. If you have any other comments, we would like to hear them! Please write them here or post
 a private note on Moodle.
-Martin: 
-Harrishan: 
+Martin:
+Harrishan:
