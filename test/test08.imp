@@ -1,0 +1,11 @@
+i := 0;
+s := 0;
+p := 0;
+while (i < 10) do {
+  i := i + 1;
+  p := 1 - p;
+  if (p = 0) then { continue } else { skip };
+  s := s + i
+};
+test (i = 10);
+test (s = 25)

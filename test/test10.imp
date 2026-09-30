@@ -1,0 +1,21 @@
+i := 0;
+total := 0;
+while (i < 4) do {
+  i := i + 1;
+  j := 0;
+  while (true) do {
+    j := j + 1;
+    k := 0;
+    while (k < 10) do {
+      k := k + 1;
+      if (k = j) then { break } else { skip }
+    };
+    total := total + k;
+    if (j = 2) then { break } else { skip }
+  };
+  if (i = 2) then { continue } else { skip };
+  total := total + 100
+};
+test (i = 4);
+test (total = 312);
+print total

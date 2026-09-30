@@ -1,0 +1,9 @@
+test (true and true);
+test (not (true and false));
+test (not (false and true));
+test (not (false and false));
+test (true or false);
+test (false or true);
+test (true or true);
+test (not (false or false));
+test (not (not true))

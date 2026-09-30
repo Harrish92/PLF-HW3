@@ -1,0 +1,7 @@
+x := 1;
+while (true) do {
+  x := x + 1;
+  if (4 < x) then { break } else { skip }
+};
+x := x * 2;
+test (x = 10)

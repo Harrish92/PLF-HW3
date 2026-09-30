@@ -1,0 +1,19 @@
+x := 0;
+log := 0;
+while (x < 100) do {
+  x := x + 1;
+  if (x > 2) then {
+    if (not (x = 3)) then {
+      log := log + 100;
+      break;
+      log := log + 1000
+    } else {
+      log := log + 10
+    }
+  } else {
+    log := log + 1
+  }
+};
+log := log * 2;
+test (x = 4);
+test (log = 224)

@@ -1,0 +1,15 @@
+i := 0;
+a := 0;
+b := 0;
+while (i < 3) do {
+  i := i + 1;
+  j := 0;
+  while (j < 4) do {
+    j := j + 1;
+    if (j <= 2) then { continue } else { skip };
+    a := a + 1
+  };
+  b := b + j
+};
+test (a = 6);
+test (b = 12)
