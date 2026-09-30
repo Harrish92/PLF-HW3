@@ -1,0 +1,38 @@
+Generative AI Disclosure (if appropriate)
+1. What tool(s) did you use?
+Martin: claude.ai
+Harrishan: 
+
+2. What kinds of prompts did you use? (No need to give the full log, but please be specific.)
+Martin: "Is this test good enough for testing this case?"
+Harrishan: 
+
+3. What is a concrete example of how the tool(s) were helpful or unhelpful?
+Martin: I had an idea of which cases i wanted to test but it helped writing relevant tests
+Harrishan: 
+
+4. What is your current opinion of the strengths and weaknesses of the tools?
+Martin: It makes me save so much time
+Harrishan: 
+
+Debriefing
+1. How many hours did yous pend on this assignment?
+Martin: 4h
+Harrishan: 
+
+2. Would you rate it as easy, moderate, or difficult?
+Martin: easy
+Harrishan: 
+
+3. Did everyone in your study group participate?
+Martin: part 2
+Harrishan: part 1
+
+4. Howdeeply do youfeel you understand the material it covers (0%–100%)?
+Martin: 90%
+Harrishan: 
+
+5. If you have any other comments, we wouldlike to hear them! Please write them here or post
+a private note on Moodle.
+Martin: 
+Harrishan: 
